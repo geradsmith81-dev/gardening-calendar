@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Biodynamic Gardening Calendar</title>
+<meta name="description" content="Best times to sow, repot, take cuttings and harvest, by the Moon among the real IAU constellations, after Maria Thun's biodynamic calendar.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<meta name="theme-color" content="#24452f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Garden Calendar">
+<style>
+  html, body { margin: 0; min-height: 100%; background: #24452f; color: #f7f5ef;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  main { max-width: 34rem; margin: 0 auto; padding: calc(2.2rem + env(safe-area-inset-top)) 1.3rem calc(2rem + env(safe-area-inset-bottom));
+    text-align: center; }
+  img.logo { width: 9rem; height: 9rem; border-radius: 2rem; box-shadow: 0 6px 24px rgba(0,0,0,0.35); }
+  h1 { font-family: Georgia, "Palatino Linotype", serif; font-weight: 600; font-size: 1.75rem; margin: 1.2rem 0 0.4rem; }
+  p.lead { font-size: 1.05rem; line-height: 1.55; color: #e4ecdf; margin: 0 0 1.6rem; }
+  a.open { display: block; background: #f4e9c8; color: #1d3726; text-decoration: none; font-weight: 700; font-size: 1.2rem;
+    padding: 1rem 1.2rem; border-radius: 0.9rem; margin: 0 0 1.6rem; }
+  a.open:active { transform: scale(0.98); }
+  .how { display: none; text-align: left; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 0.9rem; padding: 0.9rem 1.1rem; line-height: 1.6; font-size: 1rem; }
+  .how h2 { font-size: 1.05rem; margin: 0 0 0.4rem; }
+  .how ol { margin: 0; padding-left: 1.3rem; }
+  p.note { font-size: 0.92rem; color: #cfdac8; line-height: 1.5; margin-top: 1.4rem; }
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="icons/icon-512.png" alt="A plant pot under a crescent Moon">
+  <h1>Biodynamic Gardening Calendar</h1>
+  <p class="lead">Best times to sow, repot, take cuttings and harvest, by the Moon among the real IAU constellations,
+    after Maria Thun's biodynamic calendar.</p>
+  <a class="open" id="open" href="#">Open the calendar</a>
+
+  <div class="how" id="how-ios">
+    <h2>Put it on your home screen (iPhone, iPad)</h2>
+    <ol>
+      <li>Open this page in <b>Safari</b>.</li>
+      <li>Tap the <b>Share</b> button (the square with an arrow).</li>
+      <li>Tap <b>Add to Home Screen</b>, then <b>Add</b>.</li>
+    </ol>
+  </div>
+  <div class="how" id="how-android">
+    <h2>Put it on your home screen (Android)</h2>
+    <ol>
+      <li>Open this page in <b>Chrome</b>.</li>
+      <li>Tap the <b>three dots</b> at the top right.</li>
+      <li>Tap <b>Add to home screen</b> or <b>Install app</b>, then <b>Add</b>.</li>
+    </ol>
+  </div>
+  <div class="how" id="how-desktop">
+    <h2>On a phone or tablet</h2>
+    Open this page there and add it to the home screen: on iPhone and iPad with Safari's <b>Share</b> &gt;
+    <b>Add to Home Screen</b>, on Android with Chrome's <b>three dots</b> &gt; <b>Add to home screen</b>.
+  </div>
+
+  <p class="note">The home-screen icon opens the calendar directly. It needs the internet. If nobody has used the
+    calendar for a few days, the first visit can show a "wake up" button; tap it and wait about a minute.</p>
+  <noscript><p><a class="open" href="https://biodynamic-gardening-calendar.streamlit.app/">Open the calendar</a></p></noscript>
+</main>
+<script>
+  // The address of the calendar app. If the app ever moves, change only this line.
+  var APP_URL = "https://biodynamic-gardening-calendar.streamlit.app/";
+
+  (function () {
+    var link = document.getElementById("open");
+    link.href = APP_URL;
+    var standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
+                     window.navigator.standalone === true;
+    var fromHome = /[?&]source=homescreen/.test(window.location.search);
+    var opened = false;
+    try { opened = sessionStorage.getItem("gc-opened") === "1"; } catch (e) {}
+    // Opened from the home-screen icon: go straight to the calendar, once per launch
+    // (so coming back here shows this page instead of looping).
+    if ((standalone || fromHome) && !opened) {
+      try { sessionStorage.setItem("gc-opened", "1"); } catch (e) {}
+      window.location.replace(APP_URL);
+      return;
+    }
+    var ua = navigator.userAgent || "";
+    var ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    var android = /Android/.test(ua);
+    var box = document.getElementById(ios ? "how-ios" : (android ? "how-android" : "how-desktop"));
+    if (!standalone && box) { box.style.display = "block"; }
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(function () {});
+    }
+  })();
+</script>
+</body>
+</html>

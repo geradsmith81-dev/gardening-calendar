@@ -1,0 +1,30 @@
+{
+  "name": "Biodynamic Gardening Calendar",
+  "short_name": "Garden Calendar",
+  "description": "Best times to sow, repot, take cuttings and harvest, by the Moon among the real IAU constellations.",
+  "start_url": "./?source=homescreen",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#24452f",
+  "theme_color": "#24452f",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
