@@ -6,3 +6,6 @@ home screen. Opened from the home screen, it goes straight to the calendar app. 
 
 * The calendar's address is in one line of `index.html`: `var APP_URL = "...";`
 * Published with GitHub Pages (Settings > Pages > Deploy from a branch > main, / (root)).
+
+## License
+This project is released under the [MIT License](LICENSE). Copyright (c) 2026 Gerad Smith.
